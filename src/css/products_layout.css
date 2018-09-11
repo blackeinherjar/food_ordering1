@@ -1,0 +1,49 @@
+.products {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-card {
+ flex: 1 16%;
+}
+
+img.img-thumbnail
+{
+	width:200px;
+	height:200px;
+}
+
+.product-name {
+	text-align:center;
+	font-size: 14px;
+}
+
+#delete_btn
+{
+	display: inline ;
+}
+
+#edit_btn
+{
+	display: inline ;
+}
+
+#Add_product_btn{
+     position:fixed;
+     bottom:0;
+     right:0;
+	 margin-bottom: 10px;
+}
+
+.product-info {
+   margin-top: 210px ;
+}
+
+
+
+
+
+
+
+
+

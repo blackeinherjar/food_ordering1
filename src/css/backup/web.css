@@ -1,0 +1,28 @@
+html
+{
+	height: 100%;
+}
+
+
+.no-border
+{
+	background-color: transparent; 
+	border: 0; 
+	border-bottom: 1px solid grey;
+	padding-top: 10px;
+}
+
+body
+{
+	background-color: #053A31;
+	color: #fff;
+	padding-top: 100px; 
+	min-height: 100%;
+}
+
+/*#section_1 {
+   	background-image: url('{{asset('images/Section_1.jpg')}}');
+}
+*/
+
+

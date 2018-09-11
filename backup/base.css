@@ -1,0 +1,36 @@
+:root
+{
+    --theme-color: var(--dark);
+    --theme-color-dark: #212529;
+    --offset-top: 56px;
+    --offset-bottom: 56px;
+    --offset-left: 250px;
+    --offset-left-collapsed: 55px;
+}
+
+label
+{
+    font-weight: 500;
+}
+
+.card
+{
+    border-radius: 0;
+    margin-bottom: 15px;
+}
+
+.table > thead > tr > th
+{
+    background-color: var(--theme-color);
+    color: #fff;
+}
+
+
+
+
+
+
+
+
+
+

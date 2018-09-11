@@ -1,0 +1,15 @@
+h1, h2, h3, h4, h5, h6 {
+	font-family: CooperStdBlack, Arial, sans-serif;
+	font-weight: bold ;
+	text-rendering: optimizeLegibility;
+}
+h1 {
+	color: #533930;
+	font-size: 22px;
+}
+h2 {
+	color: #533930;
+	font-size: 19px;
+}
+
+
