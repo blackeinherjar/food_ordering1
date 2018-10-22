@@ -19,6 +19,7 @@
 		$login_role = $row['role'];
 		$first_name = $row['first_name'];
 		$last_name = $row['last_name'];
+		$address = $row['address'];
 		
 		
 		if($row['email'] == $email && $row['pass'] == $pass)
@@ -28,6 +29,9 @@
 			$_SESSION['user_id'] = $id;
 			$_SESSION['login_role'] = $login_role;
 			$_SESSION['full_name'] = $full_name;
+			$_SESSION['address'] = $address;
+			$_SESSION['first_name'] = $first_name;
+			$_SESSION['last_name'] = $last_name;
 			
 			if($row['role'] == "user")
 			{

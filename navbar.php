@@ -46,6 +46,18 @@
 			color:#333;
 			background-color:#333;
 		}
+
+
+
+		.centered_text {
+		    position: absolute;
+		    top: 50%;
+		    left: 50%;
+		    transform: translate(-50%, -50%);
+		    color: white;
+		}
+
+
 	</style>
 </head>
 
@@ -63,18 +75,36 @@
 	{
 		$currentCartCount = 0;
 	}
-	
+
+
+	if(empty($_SESSION['cart']))
+	{
+		$currentCartCount = 0;
+	}
+
+	$user_id = $_SESSION['user_id'];
+
+	$sql_count = "SELECT * FROM orders WHERE `user_id` = '$user_id' AND `status` = 'pending'";
+	$result_sql_count = mysqli_query($conn,$sql_count);
+
+
+	 $currentOrderCount = mysqli_num_rows($result_sql_count);
+
 
 ?>
 </div>
 
 
 
-<nav class="navbar navbar-expand-md bg-dark navbar-dark" style="margin-bottom: 0px;">
+<nav class="navbar fixed-top navbar-expand-md bg-dark navbar-dark" style="margin-bottom: 0px;">
   <ul class="navbar-nav mr-auto">
+
+  	<?php if(!isset($_SESSION['login_role'])):?>
     <li class="nav-item">
       <a href="index.php" class="navbar-brand"><i class="fas fa-home"></i> Home</a> 
     </li>
+     <?php endif; ?>	
+
     <li class="nav-item">
      <a href="products.php" class="nav-link"><i class="fas fa-list-alt"></i> Menu</a> 
     </li>
@@ -82,11 +112,39 @@
     <?php if(isset($_SESSION['login_role'])):?>
 	    <?php if($login_role == "user"):?>
 		    <li class="nav-item">
-		      <a href="cart.php" class="nav-link"><i class="fas fa-cart-plus"></i> Cart <span class="badge badge-primary"></span></a> 
+		      <a href="cart.php" class="nav-link"><i class="fas fa-cart-plus"></i> Cart <span class="badge badge-primary badge-cart"></span></a> 
 				     	<input type="hidden" name="currentCartCount" value="<?php echo $currentCartCount ?>">
 		    </li>
+
+		       <li class="nav-item">
+		     <a href="order.php" class="nav-link"><i class="fas fa-credit-card"></i> Order <span class="badge badge-primary badge-order"></span></a> 
+
+		     <input type="hidden" name="currentOrderCount" value="<?php echo $currentOrderCount ?>">
+
+
+		    </li>
+
+		  
+
 	    <?php endif; ?>	
+
+			     <?php if($login_role == "admin"):?>
+		   <li class="nav-item">
+		     <a href="users.php" class="nav-link"><i class="fas fa-list-alt"></i> Users</a> 
+		    </li>
+
+
+		     <li class="nav-item">
+		    <a href="customer_order.php" class="nav-link"><i class="fas fa-credit-card"></i> Customer Order <span class="badge badge-primary badge-order"></span></a> 
+		    </li>
+
+
+		   <?php endif; ?>	
+
+
     <?php endif; ?>	
+
+  
   </ul>
 
 
@@ -96,7 +154,7 @@
 		<?php if(isset($_SESSION['login_role'])):?>
 
 	   	  	<li class="nav-item">
-	  	 		<a href="#" class="nav-link"><i class="fas fa-user"></i> Profile</a> 
+	  	 		<a href="profile.php" class="nav-link"><i class="fas fa-user"></i> Profile</a> 
 	   	   	</li>
 
 		    <li class="nav-item">
@@ -113,6 +171,7 @@
   
 </nav>
 
+<div style="padding-bottom: 80px"></div>
 
 
 
@@ -139,7 +198,10 @@
 
 $(document).ready(function() {
 	$currentCartCount = $('[name="currentCartCount"]').val();
-    $( ".badge" ).text($currentCartCount);
+    $( ".badge-cart" ).text($currentCartCount);
+
+    	$currentOrderCount = $('[name="currentOrderCount"]').val();
+    $( ".badge-order" ).text($currentOrderCount);
 });
 
 

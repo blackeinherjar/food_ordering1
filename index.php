@@ -79,7 +79,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form>
+      <form name="register_form" action="register_process.php" method="post">
       <div class="modal-body">
         
 
@@ -87,49 +87,49 @@
 				<div class="form-group row">
 				    <label class="col-sm-3 col-form-label">Email</label>
 				   <div class="col-sm-9">
-				      <input type="email" class="form-control" placeholder="Enter Email">
+				      <input type="email" class="form-control" placeholder="Enter Email" name="email">
 				    </div>
 				</div>
 					
 				<div class="form-group row">
 				    <label class="col-sm-3 col-form-label">Password</label>
 				    <div class="col-sm-9">
-				      <input type="password" class="form-control" placeholder="Enter Password">
+				      <input type="password" class="form-control" placeholder="Enter Password" name="pass">
 				    </div>
 				</div>
 
 				<div class="form-group row">
 				    <label class="col-sm-3 col-form-label">First Name</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" placeholder="Enter First Name">
+				      <input type="text" class="form-control" placeholder="Enter First Name" name="first_name">
 				    </div>
 				</div>
 
 				<div class="form-group row">
 				    <label class="col-sm-3 col-form-label">Last Name</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" placeholder="Enter Last Name">
+				      <input type="text" class="form-control" placeholder="Enter Last Name" name="last_name">
 				    </div>
 				</div>
 
 				<div class="form-group row">
 				    <label class="col-sm-3 col-form-label">Age</label>
 				    <div class="col-sm-9">
-				      <input type="number" class="form-control" placeholder="Enter Age">
+				      <input type="number" class="form-control" placeholder="Enter Age" name="age">
 				    </div>
 				</div>
 
 				<div class="form-group row">
 				    <label class="col-sm-3 col-form-label">Address</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" placeholder="Enter Address">
+				      <input type="text" class="form-control" placeholder="Enter Address" name="address">
 				    </div>
 				</div>
 
 				<div class="form-group row">
 				    <label class="col-sm-3 col-form-label">Contact No</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" placeholder="Password">
+				      <input type="text" class="form-control" placeholder="Password" name="contact_no">
 				    </div>
 				</div>
 
@@ -145,7 +145,7 @@
       </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
-	        <button type="button" class="btn btn-primary"><i class="fas fa-save"></i> Save changes</button>
+	        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Register</button>
 	      </div>
       </form>
     </div>
@@ -208,6 +208,41 @@
 	            }, 1000);
 	        }      
 	       
+	    })
+	});
+
+	 $('[name="register_form"]').submit(function(e)
+	{
+	    $.Event(e).preventDefault();
+	    $.ajax({
+	        url: $(this).attr('action'),
+	        type: $(this).attr('method'),
+	        data: $(this).serialize(),
+	        dataType: 'JSON',
+	    }).done(function(data)
+	    {        
+	     	
+   			if (data.status == 'error')
+	        {
+	            new Noty({          
+	                type: data.status,
+	                text: data.msg,            
+	                timeout: 2000
+	            }).show();
+	        }
+	        else
+	        {
+	            new Noty({          
+	                type: data.status,
+	                text: data.msg,            
+	                timeout: 2000
+	            }).show();
+
+	            setTimeout(function()
+	            {
+	                $('#registerModal').modal('hide');
+	            }, 1000);
+	        }     	    
 	    })
 	});
 
