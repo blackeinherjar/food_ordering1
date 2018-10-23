@@ -39,6 +39,9 @@
 			
 				$res['status']    = 'success';	
 				$res['msg']    = 'Account created successful,please check your email for account verification';	
+
+				require('email_verification.php');	
+
 			}
 		}else
 		{			
@@ -51,7 +54,7 @@
 		$res['msg']    = 'Please fill in the require information';	
 	}	
 
-	require('email_verification.php');	
+
 
 	echo json_encode($res);	
 

@@ -131,7 +131,7 @@
 
       </div>
         <div class="modal-footer">
-            <input type="text" class="form-control" name="order_id">
+            <input type="hidden" class="form-control" name="order_id">
           <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
           <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Submit</button>
         </div>
