@@ -9,7 +9,7 @@
 
 	$user_id = $_SESSION['user_id'];
 
-	$sql_order = "SELECT * FROM orders WHERE `user_id` = '$user_id' AND `status` = 'pending'";
+	$sql_order = "SELECT * FROM orders WHERE `user_id` = '$user_id' AND `status` = 'pending'  OR  `status` = 'shipping'";
 
 	$result_order = mysqli_query($conn,$sql_order);
 
@@ -42,7 +42,7 @@
         <th>Shipping Address</th>
         <th>Total Price</th>
         <th>Order Date</th>
-        <th colspan="2">Paid Status</th>
+        <th colspan="2">Status</th>
       </tr>
     </thead>
     <tbody>
@@ -65,8 +65,16 @@
     <?php if($row['paid'] == 0) :?>
          <td style="color:red" class="font-weight-bold">Not yet Paid</td>
          <?php else : ?>
-           <td style="color:green" class="font-weight-bold">Paid (waiting to be approve)</td>
-         <?php endif; ?>
+
+
+                 <?php if($row['status'] == 'shipping') :?>
+                <td style="color:orange" class="font-weight-bold">Shipping Now</td>
+               <?php else : ?>
+                  <td style="color:green" class="font-weight-bold">Paid (waiting to be approve)</td>
+
+                 <?php endif; ?>
+
+    <?php endif; ?>
 
 
 

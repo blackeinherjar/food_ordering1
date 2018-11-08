@@ -23,13 +23,13 @@
 
 		    <form class="login-form" id="login" action="login.php" method="post">
   <div class="form-group">
-    <label class="text-uppercase">Username</label>
-    <input type="text" name="email" class="form-control" placeholder="">
+    <label class="text-uppercase">Email</label>
+    <input type="text" name="email" id="email" class="form-control" placeholder="">
     
   </div>
   <div class="form-group">
     <label class="text-uppercase">Password</label>
-    <input type="password" name="pass" class="form-control" placeholder="">
+    <input type="password" name="pass" id="pass" class="form-control" placeholder="">
   </div>
 
   
@@ -39,11 +39,11 @@
       <input type="checkbox" class="form-check-input">
       <small>Remember Me</small>
     </label>
-    <button type="submit" class="btn btn-login float-right">Submit</button>
+    <button type="submit" id="submit" class="btn btn-login float-right">Submit</button>
   </div>
   
 </form>
-<div class="small-text"> <p class="text-center text-muted">Not a member? <i class="fa fa-heart"></i> <a href="#" data-toggle="modal" data-target="#registerModal">
+<div class="small-text"> <p class="text-center text-muted">Not a member? <i class="fa fa-heart"></i> <a name="registerModal_Test" href="#" data-toggle="modal" data-target="#registerModal">
   Register an Account
 </a></p></div>
 
@@ -87,7 +87,7 @@
 				<div class="form-group row">
 				    <label class="col-sm-3 col-form-label">Email</label>
 				   <div class="col-sm-9">
-				      <input type="email" class="form-control" placeholder="Enter Email" name="email">
+				      <input type="email" class="form-control" placeholder="Enter Email" id="email" name="email">
 				    </div>
 				</div>
 					
@@ -145,7 +145,7 @@
       </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
-	        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Register</button>
+	        <button id="submit" type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Register</button>
 	      </div>
       </form>
     </div>

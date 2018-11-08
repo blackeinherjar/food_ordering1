@@ -11,7 +11,11 @@ include 'navbar.php';
 		<?php 
 		$user_id = $_SESSION['user_id']; 
 		$login_role = $_SESSION['login_role'];
+		
+
 	
+
+
 		?>
 	</div>
 
@@ -39,8 +43,9 @@ include 'navbar.php';
 		        <th>Address</th>
 		        <th>Contact No</th>
 		       
-		      
+		            <th>Ordering Count</th>
 		        <th>Action</th>
+		   
 		    </tr>
 		    </thead>
 
@@ -48,6 +53,22 @@ include 'navbar.php';
 
 		    <?php while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){   ?>
 		    	<?php if($row['is_deleted'] == 0):?>
+		    		<?php 
+		    			$id = $row['id'];
+
+
+		    				$order_count = "SELECT COUNT(*) as count FROM orders WHERE user_id = $id";
+
+	$result_count = mysqli_query($conn,$order_count); 
+	$rowCount = mysqli_fetch_array($result_count,MYSQLI_ASSOC);
+
+	$num_rows = $rowCount['count']; 
+
+		    		?>
+
+
+
+
 			 	<tr>
 			        <td><b><a href='user_detail.php?id=<?php echo $row['id'] ?>'><?php echo $row['id'] ?></a></b></td>
 			        <td><img class="img-thumbnail" onerror="this.src = 'src/image/No_available_image.jpg'" src="src/image/profile/<?php echo $row['image_name'] ?>" style="width:100px;height:100px"></td>
@@ -57,8 +78,8 @@ include 'navbar.php';
 			        <td><?php echo $row['age'] ?></td>
 			        <td><?php echo $row['address'] ?></td>
 			        <td><?php echo $row['contact_no'] ?></td>
-			      
-
+			   
+			           <td><h6 style="color:purple"><?php echo $num_rows; ?></h6></td>   	
 			       	<td>
 			       		<form action="delete_user_process.php" method="post" name="delete">
 			       			<input type="hidden" name="id" value="<?php echo $row['id']?>">
@@ -68,7 +89,8 @@ include 'navbar.php';
 				        	<?php endif; ?>
 			       			><i class="fas fa-trash-alt"></i> Delete</button><!-- only admin can delete,admin are not allow to delete themself,user delete will be disabled -->
 			       		</form>
-			       	</td>       		
+			       	</td>    
+
 			        
 			    </tr>
 			    <?php endif; ?>

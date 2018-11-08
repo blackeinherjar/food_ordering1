@@ -8,14 +8,14 @@
 	$id = $_GET['id'];
 
 
-$sql = "UPDATE `orders` SET `status`='shipping' WHERE `id`='$id'";
+$sql = "UPDATE `orders` SET `status`='close' WHERE `id`='$id'";
 
 if (mysqli_query($conn, $sql)) {
    $res['status'] = 'success';
-	$res['msg']    = 'approve success';
+	$res['msg']    = 'order close';
 } else {
   $res['status'] = 'error';
-	$res['msg']    = 'approve failed';
+	$res['msg']    = 'something when wrong,please try again';
 }
 
 	

@@ -91,6 +91,20 @@
 	 $currentOrderCount = mysqli_num_rows($result_sql_count);
 
 
+
+
+	 //admin //customer order count
+
+	 $sql_customer_count = "SELECT * FROM orders WHERE `status` = 'pending' OR `status` = 'shipping'";
+	$result_customer_sql_count = mysqli_query($conn,$sql_customer_count);
+
+
+	 $currentCustomerOrderCount = mysqli_num_rows($result_customer_sql_count);
+
+
+
+
+
 ?>
 </div>
 
@@ -135,7 +149,11 @@
 
 
 		     <li class="nav-item">
-		    <a href="customer_order.php" class="nav-link"><i class="fas fa-credit-card"></i> Customer Order <span class="badge badge-primary badge-order"></span></a> 
+		    <a href="customer_order.php" class="nav-link"><i class="fas fa-credit-card"></i> Customer Order <span class="badge badge-primary badge-customer_order"></span></a> 
+
+		    <input type="hidden" name="currentCustomerOrderCount" value="<?php echo $currentCustomerOrderCount ?>">
+
+
 		    </li>
 
 
@@ -158,7 +176,7 @@
 	   	   	</li>
 
 		    <li class="nav-item">
-		      	<a href="" class="nav-link logout"><i class="fas fa-sign-out-alt"></i> Logout</a> 
+		      	<a href="" id="logout" class="nav-link logout"><i class="fas fa-sign-out-alt"></i> Logout</a> 
 		      	<form name="logoutForm" action="log_out.php" method="GET" hidden> 
 			    	
 			   </form>
@@ -202,6 +220,13 @@ $(document).ready(function() {
 
     	$currentOrderCount = $('[name="currentOrderCount"]').val();
     $( ".badge-order" ).text($currentOrderCount);
+
+
+
+    	$currentCustomerOrderCount = $('[name="currentCustomerOrderCount"]').val();
+    $( ".badge-customer_order" ).text($currentCustomerOrderCount);
+
+
 });
 
 

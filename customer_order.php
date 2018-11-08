@@ -9,7 +9,7 @@
 
 	$user_id = $_SESSION['user_id'];
 
-	$sql_order = "SELECT * FROM orders WHERE `status` = 'pending'";
+	$sql_order = "SELECT * FROM orders WHERE `status` = 'pending' OR  `status` = 'shipping' ";
 
 	$result_order = mysqli_query($conn,$sql_order);
 
@@ -44,7 +44,9 @@
         <th>Order Date</th>
           <th>Status</th>
            <th>Paid Status</th>
+             <th>Receive Status</th>
           <th>Action</th>
+         
 
       </tr>
     </thead>
@@ -64,8 +66,12 @@
         
 		<td><?php echo $row['date']?></td>
 
+      <?php if($row['status'] == "pending") : ?>
+         <td style="color:red"><i  class="font-weight-bold"><?php echo $row['status']?></i></td>
+         <?php else :?>
+        <td style="color:orange"><i  class="font-weight-bold"><?php echo $row['status']?></i></td>
+      <?php endif; ?>
 
-         <td style="color:red"><i><?php echo $row['status']?></i></td>
 
          <?php if($row['paid'] == 0) :?>
          <td style="color:red" class="font-weight-bold">Not yet Paid</td>
@@ -73,8 +79,20 @@
            <td style="color:green" class="font-weight-bold">Paid</td>
          <?php endif; ?>
 
-                 <td>
 
+
+
+           <?php if($row['receive_status'] == 0) : ?>
+               <td>No</td>
+                  <?php else :?>
+                <td>Yes</td>
+                 <?php endif; ?>
+
+
+
+
+                 <?php if($row['status'] == "pending") : ?>
+                 <td>
                 <a class="approve" href="">Approve</a>
                 <form name="approveForm" action="approve.php" method="GET" hidden> 
                     <input name="id" type="text" value="<?php echo $row['id']?>">
@@ -82,6 +100,22 @@
                </td>
 
 
+                  <?php else :?>
+               <td>
+                <a class="complete" href="">Complete</a>
+                <form name="completeForm" action="complete.php" method="GET" hidden> 
+                    <input name="id" type="text" value="<?php echo $row['id']?>">
+               </form>
+               </td>
+
+
+
+
+
+
+
+
+                 <?php endif; ?>
 
 		</tr>
 		<?php $i++; ?>
@@ -200,6 +234,55 @@
   
     })
 });
+
+
+
+
+
+
+
+
+
+
+    $('.complete').click(function(e)
+    {
+        $.Event(e).preventDefault();
+        $(this).siblings('form').submit();
+    });
+
+
+
+     $('[name="completeForm"]').submit(function(e)
+{
+    $.Event(e).preventDefault();
+    $.ajax({
+        url: $(this).attr('action'),
+        type: $(this).attr('method'),
+        data: $(this).serialize(),
+        dataType: 'JSON',
+    }).done(function(data)
+    {
+               
+        
+            new Noty({          
+                type: data.status,
+                text: data.msg,            
+                timeout: 1000
+            }).show();
+
+           
+         setTimeout(function()
+                {
+                    
+                        window.location = "customer_order.php";
+                    
+
+                    
+                }, 1000);
+  
+    })
+});
+
 
 
 

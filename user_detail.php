@@ -18,7 +18,15 @@
 	$address = $row['address'];
 	$age = $row['age'];
 	$image_name = $row['image_name'];
+
+
+
+
+
+
 ?>
+
+
 
 
 

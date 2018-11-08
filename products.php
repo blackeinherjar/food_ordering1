@@ -55,7 +55,7 @@
 					 		<center>RM <?php echo $row['product_price'];?></center>
 		            		<?php if(isset($_SESSION['login_role'])):?>
 								<?php if($login_role == "admin"):?>
-									<form name="deleteForm" id="delete_btn" action="delete_product.php" method="get" onSubmit="return confirm('are you sure you want to delete this item?')">
+									<form name="deleteForm" id="delete_btn" action="delete_product.php" method="get">
 										<input type="hidden" name="id" value="<?php echo $id ?>">
 										<input type="hidden" name="is_deleted" value="<?php echo $is_deleted ?>">  
 										<button class="btn btn-danger btn-sm" type="submit">Delete</button>
