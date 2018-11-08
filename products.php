@@ -4,7 +4,7 @@
 	
 	
 	<div hidden>
-		<?php echo testing ?>
+		<?php echo "testing" ?>
 	</div>
 	
 	
