@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html>
-<?php 
+
+	
+	
+	<div hidden>
+		<?php echo testing ?>
+	</div>
+	
+	
+	
+	
+	<?php 
 		include 'navbar.php';
 		if(isset($_SESSION['login_role']))
 		{	
